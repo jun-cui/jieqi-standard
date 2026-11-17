@@ -1,0 +1,417 @@
+{
+  "description": "Move code syntax (spec 4, section 2) and traditional notation (spec 4, section 5). The notation is computed from the position before the move.",
+  "valid_codes": [
+    {
+      "code": "h2e2",
+      "from": "h2",
+      "to": "e2",
+      "reveal": null,
+      "disclosure": null
+    },
+    {
+      "code": "h2e2=R",
+      "from": "h2",
+      "to": "e2",
+      "reveal": "R",
+      "disclosure": null
+    },
+    {
+      "code": "b2b9=C:H",
+      "from": "b2",
+      "to": "b9",
+      "reveal": "C",
+      "disclosure": "H"
+    },
+    {
+      "code": "b2b9=C:?",
+      "from": "b2",
+      "to": "b9",
+      "reveal": "C",
+      "disclosure": "?"
+    },
+    {
+      "code": "a0a9:S",
+      "from": "a0",
+      "to": "a9",
+      "reveal": null,
+      "disclosure": "S"
+    },
+    {
+      "code": "i9i0:?",
+      "from": "i9",
+      "to": "i0",
+      "reveal": null,
+      "disclosure": "?"
+    },
+    {
+      "code": "e0e1",
+      "from": "e0",
+      "to": "e1",
+      "reveal": null,
+      "disclosure": null
+    }
+  ],
+  "invalid_codes": ["h2h2", "h2e2=G", "h2e2=c", "h2e2=X", "h2e2:", "H2E2", "h2-e2", "h2e2=C=R", "h2e2:H=C", "j0a0", "a10a9", "h2e2 ", ""],
+  "display": [
+    {
+      "jps": "xxxxgxxxx/9/1x5x1/x1x1x1x1x/9/9/X1X1X1X1X/1X5X1/9/XXXXGXXXX r A2E2H2R2C2S5 a2e2h2r2c2s5 0 1",
+      "move": "h2e2=C",
+      "en": "XC2.5(C)",
+      "zh": "暗炮二平五(炮)"
+    },
+    {
+      "jps": "xxxxgxxxx/9/1x5x1/x1x1x1x1x/9/9/X1X1X1X1X/1X5X1/9/XXXXGXXXX r A2E2H2R2C2S5 a2e2h2r2c2s5 0 1",
+      "move": "b0c2=R",
+      "en": "XH8+7(R)",
+      "zh": "暗马八进七(车)"
+    },
+    {
+      "jps": "xxxxgxxxx/9/1x5x1/x1x1x1x1x/9/9/X1X1X1X1X/1X5X1/9/XXXXGXXXX r A2E2H2R2C2S5 a2e2h2r2c2s5 0 1",
+      "move": "b2b9=H:?",
+      "en": "XC8+7(H)",
+      "zh": "暗炮八进七(马)"
+    },
+    {
+      "jps": "xxxxgxxxx/9/1x5x1/x1x1x1x1x/9/9/X1X1X1X1X/1X5X1/9/XXXXGXXXX r A2E2H2R2C2S5 a2e2h2r2c2s5 0 1",
+      "move": "i0i1=S",
+      "en": "XR1+1(S)",
+      "zh": "暗车一进一(兵)"
+    },
+    {
+      "jps": "xxxxgxxxx/9/1x5x1/x1x1x1x1x/9/9/X1X1X1X1X/1X5X1/9/XXXXGXXXX r A2E2H2R2C2S5 a2e2h2r2c2s5 0 1",
+      "move": "e3e4=S",
+      "en": "XS5+1(S)",
+      "zh": "暗兵五进一(兵)"
+    },
+    {
+      "jps": "xxxxgxxxx/9/1x5x1/x1x1x1x1x/9/9/X1X1X1X1X/1X5X1/9/XXXXGXXXX r A2E2H2R2C2S5 a2e2h2r2c2s5 0 1",
+      "move": "d0e1=A",
+      "en": "XA6+5(A)",
+      "zh": "暗仕六进五(仕)"
+    },
+    {
+      "jps": "xxxxgxxxx/9/1x5x1/x1x1x1x1x/9/9/X1X1X1X1X/1X5X1/9/XXXXGXXXX r A2E2H2R2C2S5 a2e2h2r2c2s5 0 1",
+      "move": "c0e2=E",
+      "en": "XE7+5(E)",
+      "zh": "暗相七进五(相)"
+    },
+    {
+      "jps": "xxxxgxxxx/9/1x5x1/x1x1x1x1x/9/9/X1X1X1X1X/1X2R4/9/XXXXGXXXX b A2E2H2R1C2S5 a2e2h2r2c2s5 0 1",
+      "move": "h7e7=S",
+      "en": "XC8.5(S)",
+      "zh": "暗炮８平５(卒)"
+    },
+    {
+      "jps": "3g5/9/9/9/R8/9/9/9/9/RHEAG4 r - - 0 1",
+      "move": "a5a6",
+      "en": "Rf+1",
+      "zh": "前车进一"
+    },
+    {
+      "jps": "3g5/9/9/9/R8/9/9/9/9/RHEAG4 r - - 0 1",
+      "move": "a0a1",
+      "en": "Rr+1",
+      "zh": "后车进一"
+    },
+    {
+      "jps": "3g5/9/9/9/R8/9/9/9/9/RHEAG4 r - - 0 1",
+      "move": "a5b5",
+      "en": "Rf.8",
+      "zh": "前车平八"
+    },
+    {
+      "jps": "3g5/9/9/9/R8/9/9/9/9/RHEAG4 r - - 0 1",
+      "move": "b0c2",
+      "en": "H8+7",
+      "zh": "马八进七"
+    },
+    {
+      "jps": "3g5/9/9/9/R8/9/9/9/9/RHEAG4 r - - 0 1",
+      "move": "c0e2",
+      "en": "E7+5",
+      "zh": "相七进五"
+    },
+    {
+      "jps": "3g5/9/9/9/R8/9/9/9/9/RHEAG4 r - - 0 1",
+      "move": "d0e1",
+      "en": "A6+5",
+      "zh": "仕六进五"
+    },
+    {
+      "jps": "3g5/9/9/9/R8/9/9/9/9/RHEAG4 r - - 0 1",
+      "move": "e0e1",
+      "en": "G5+1",
+      "zh": "帅五进一"
+    },
+    {
+      "jps": "3g5/9/9/9/R8/9/9/9/9/RHEAG4 r - - 0 1",
+      "move": "e0f0",
+      "en": "G5.4",
+      "zh": "帅五平四"
+    },
+    {
+      "jps": "3g5/9/9/9/S1S1S4/9/2S6/9/9/4G4 r - - 0 1",
+      "move": "e5e6",
+      "en": "S5+1",
+      "zh": "兵五进一"
+    },
+    {
+      "jps": "3g5/9/9/9/S1S1S4/9/2S6/9/9/4G4 r - - 0 1",
+      "move": "c5c6",
+      "en": "Sf+1",
+      "zh": "前兵进一"
+    },
+    {
+      "jps": "3g5/9/9/9/S1S1S4/9/2S6/9/9/4G4 r - - 0 1",
+      "move": "a5b5",
+      "en": "S9.8",
+      "zh": "兵九平八"
+    },
+    {
+      "jps": "3g5/9/9/9/S1S1S4/9/2S6/9/9/4G4 r - - 0 1",
+      "move": "c3c4",
+      "en": "Sr+1",
+      "zh": "后兵进一"
+    },
+    {
+      "jps": "xxxxgxxxx/9/1x5x1/x1x1x1x1x/9/9/X1X1X1X1X/1X5X1/9/XXXXGXXXX r A2E2H2R2C2S5 a2e2h2r2c2s5 0 1",
+      "move": "h2h9=S:?",
+      "en": "XC2+7(S)",
+      "zh": "暗炮二进七(兵)"
+    },
+    {
+      "jps": "xxxxgxxSx/9/1x5x1/x1x1x1x1x/9/9/X1X1X1X1X/1X7/9/XXXXGXXXX b A2E2H2R2C2S4 a2e2h2r2c2s5 0 1",
+      "move": "b7b0=S:?",
+      "en": "XC2+7(S)",
+      "zh": "暗炮２进７(卒)"
+    },
+    {
+      "jps": "xxxxgxxSx/9/7x1/x1x1x1x1x/9/9/X1X1X1X1X/1X7/9/XsXXGXXXX r A2E2H2R2C2S4 a2e2h2r2c2s4 0 2",
+      "move": "h9g9:?",
+      "en": "S2.3",
+      "zh": "兵二平三"
+    },
+    {
+      "jps": "xxxxgxS1x/9/7x1/x1x1x1x1x/9/9/X1X1X1X1X/1X7/9/XsXXGXXXX b A2E2H2R2C2S4 a2e2h2r2c2s4 0 2",
+      "move": "b0a0:?",
+      "en": "S2.1",
+      "zh": "卒２平１"
+    },
+    {
+      "jps": "xxxxgxS1x/9/7x1/x1x1x1x1x/9/9/X1X1X1X1X/1X7/9/s1XXGXXXX r A2E2H2R2C2S4 a2e2h2r2c2s4 0 3",
+      "move": "g9f9:?",
+      "en": "S3.4",
+      "zh": "兵三平四"
+    },
+    {
+      "jps": "xxxxgS2x/9/7x1/x1x1x1x1x/9/9/X1X1X1X1X/1X7/9/s1XXGXXXX b A2E2H2R2C2S4 a2e2h2r2c2s4 0 3",
+      "move": "e9f9",
+      "en": "G5.6",
+      "zh": "将５平６"
+    },
+    {
+      "jps": "xxxx1g2x/9/7x1/x1x1x1x1x/9/9/X1X1X1X1X/1X7/9/s1XXGXXXX r A2E2H2R2C2S4 a2e2h2r2c2s4 0 4",
+      "move": "b2b8=S",
+      "en": "XC8+6(S)",
+      "zh": "暗炮八进六(兵)"
+    },
+    {
+      "jps": "xxxx1g2x/1S7/7x1/x1x1x1x1x/9/9/X1X1X1X1X/9/9/s1XXGXXXX b A2E2H2R2C2S3 a2e2h2r2c2s4 0 4",
+      "move": "a0b0",
+      "en": "S1.2",
+      "zh": "卒１平２"
+    },
+    {
+      "jps": "xxxx1g2x/1S7/7x1/x1x1x1x1x/9/9/X1X1X1X1X/9/9/1sXXGXXXX r A2E2H2R2C2S3 a2e2h2r2c2s4 1 5",
+      "move": "c0e2=C",
+      "en": "XE7+5(C)",
+      "zh": "暗相七进五(炮)"
+    },
+    {
+      "jps": "xxxx1g2x/1S7/7x1/x1x1x1x1x/9/9/X1X1X1X1X/4C4/9/1s1XGXXXX b A2E2H2R2C1S3 a2e2h2r2c2s4 0 5",
+      "move": "h7h1=H",
+      "en": "XC8+6(H)",
+      "zh": "暗炮８进６(马)"
+    },
+    {
+      "jps": "xxxx1g2x/1S7/9/x1x1x1x1x/9/9/X1X1X1X1X/4C4/7h1/1s1XGXXXX r A2E2H2R2C1S3 a2e2h1r2c2s4 0 6",
+      "move": "e2e6:?",
+      "en": "C5+4",
+      "zh": "炮五进四"
+    },
+    {
+      "jps": "xxxx1g2x/1S7/9/x1x1C1x1x/9/9/X1X1X1X1X/9/7h1/1s1XGXXXX b A2E2H2R2C1S3 a2e2h1r2c2s4 0 6",
+      "move": "b0c0",
+      "en": "S2.3",
+      "zh": "卒２平３"
+    },
+    {
+      "jps": "xxxx1g2x/1S7/9/x1x1C1x1x/9/9/X1X1X1X1X/9/7h1/2sXGXXXX r A2E2H2R2C1S3 a2e2h1r2c2s4 1 7",
+      "move": "b8b9:?",
+      "en": "S8+1",
+      "zh": "兵八进一"
+    },
+    {
+      "jps": "xSxx1g2x/9/9/x1x1C1x1x/9/9/X1X1X1X1X/9/7h1/2sXGXXXX b A2E2H2R2C1S3 a2e2h1r2c2s4 0 7",
+      "move": "h1f2",
+      "en": "H8-6",
+      "zh": "马８退６"
+    },
+    {
+      "jps": "xSxx1g2x/9/9/x1x1C1x1x/9/9/X1X1X1X1X/5h3/9/2sXGXXXX r A2E2H2R2C1S3 a2e2h1r2c2s4 1 8",
+      "move": "e0e1",
+      "en": "G5+1",
+      "zh": "帅五进一"
+    },
+    {
+      "jps": "xSxx1g2x/9/9/x1x1C1x1x/9/9/X1X1X1X1X/5h3/4G4/2sX1XXXX b A2E2H2R2C1S3 a2e2h1r2c2s4 2 8",
+      "move": "a9b9=S",
+      "en": "XR1.2(S)",
+      "zh": "暗车１平２(卒)"
+    },
+    {
+      "jps": "1sxx1g2x/9/9/x1x1C1x1x/9/9/X1X1X1X1X/5h3/4G4/2sX1XXXX r A2E2H2R2C1S3 a2e2h1r2c2s3 0 9",
+      "move": "e6a6:?",
+      "en": "C5.9",
+      "zh": "炮五平九"
+    },
+    {
+      "jps": "1sxx1g2x/9/9/C1x3x1x/9/9/X1X1X1X1X/5h3/4G4/2sX1XXXX b A2E2H2R2C1S3 a2e2h1r2c2s3 0 9",
+      "move": "d9e8=A",
+      "en": "XA4+5(A)",
+      "zh": "暗士４进５(士)"
+    },
+    {
+      "jps": "1sx2g2x/4a4/9/C1x3x1x/9/9/X1X1X1X1X/5h3/4G4/2sX1XXXX r A2E2H2R2C1S3 a1e2h1r2c2s3 0 10",
+      "move": "a6a9",
+      "en": "C9+3",
+      "zh": "炮九进三"
+    },
+    {
+      "jps": "Csx2g2x/4a4/9/2x3x1x/9/9/X1X1X1X1X/5h3/4G4/2sX1XXXX b A2E2H2R2C1S3 a1e2h1r2c2s3 1 10",
+      "move": "f2d3",
+      "en": "H6-4",
+      "zh": "马６退４"
+    },
+    {
+      "jps": "Csx2g2x/4a4/9/2x3x1x/9/9/X1XhX1X1X/9/4G4/2sX1XXXX r A2E2H2R2C1S3 a1e2h1r2c2s3 2 11",
+      "move": "e1e2",
+      "en": "G5+1",
+      "zh": "帅五进一"
+    },
+    {
+      "jps": "Csx2g2x/4a4/9/2x3x1x/9/9/X1XhX1X1X/4G4/9/2sX1XXXX b A2E2H2R2C1S3 a1e2h1r2c2s3 3 11",
+      "move": "d3c1",
+      "en": "H4+3",
+      "zh": "马４进３"
+    },
+    {
+      "jps": "Csx2g2x/4a4/9/2x3x1x/9/9/X1X1X1X1X/4G4/2h6/2sX1XXXX r A2E2H2R2C1S3 a1e2h1r2c2s3 4 12",
+      "move": "e2d2",
+      "en": "G5.6",
+      "zh": "帅五平六"
+    },
+    {
+      "jps": "Csx2g2x/4a4/9/2x3x1x/9/9/X1X1X1X1X/3G5/2h6/2sX1XXXX b A2E2H2R2C1S3 a1e2h1r2c2s3 5 12",
+      "move": "c1e0",
+      "en": "H3+5",
+      "zh": "马３进５"
+    },
+    {
+      "jps": "Csx2g2x/4a4/9/2x3x1x/9/9/X1X1X1X1X/3G5/9/2sXhXXXX r A2E2H2R2C1S3 a1e2h1r2c2s3 6 13",
+      "move": "d0e1=A",
+      "en": "XA6+5(A)",
+      "zh": "暗仕六进五(仕)"
+    },
+    {
+      "jps": "Csx2g2x/4a4/9/2x3x1x/9/9/X1X1X1X1X/3G5/4A4/2s1hXXXX b A1E2H2R2C1S3 a1e2h1r2c2s3 0 13",
+      "move": "i6i5=R",
+      "en": "XS9+1(R)",
+      "zh": "暗卒９进１(车)"
+    },
+    {
+      "jps": "Csx2g2x/4a4/9/2x3x2/8r/9/X1X1X1X1X/3G5/4A4/2s1hXXXX r A1E2H2R2C1S3 a1e2h1r1c2s3 0 14",
+      "move": "a9c9:?",
+      "en": "C9.7",
+      "zh": "炮九平七"
+    },
+    {
+      "jps": "1sC2g2x/4a4/9/2x3x2/8r/9/X1X1X1X1X/3G5/4A4/2s1hXXXX b A1E2H2R2C1S3 a1e2h1r1c2s3 0 14",
+      "move": "i9i7=S",
+      "en": "XR9+2(S)",
+      "zh": "暗车９进２(卒)"
+    },
+    {
+      "jps": "1sC2g3/4a4/8s/2x3x2/8r/9/X1X1X1X1X/3G5/4A4/2s1hXXXX r A1E2H2R2C1S3 a1e2h1r1c2s2 0 15",
+      "move": "g0i2=C",
+      "en": "XE3+1(C)",
+      "zh": "暗相三进一(炮)"
+    },
+    {
+      "jps": "1sC2g3/4a4/8s/2x3x2/8r/9/X1X1X1X1X/3G4C/4A4/2s1hX1XX b A1E2H2R2S3 a1e2h1r1c2s2 0 15",
+      "move": "i5i3:?",
+      "en": "R9+2",
+      "zh": "车９进２"
+    },
+    {
+      "jps": "1sC2g3/4a4/8s/2x3x2/9/9/X1X1X1X1r/3G4C/4A4/2s1hX1XX r A1E2H2R2S3 a1e2h1r1c2s2 0 16",
+      "move": "i2e2",
+      "en": "C1.5",
+      "zh": "炮一平五"
+    },
+    {
+      "jps": "1sC2g3/4a4/8s/2x3x2/9/9/X1X1X1X1r/3GC4/4A4/2s1hX1XX b A1E2H2R2S3 a1e2h1r1c2s2 1 16",
+      "move": "i3h3",
+      "en": "R9.8",
+      "zh": "车９平８"
+    },
+    {
+      "jps": "1sC2g3/4a4/8s/2x3x2/9/9/X1X1X1Xr1/3GC4/4A4/2s1hX1XX r A1E2H2R2S3 a1e2h1r1c2s2 2 17",
+      "move": "i0i7=H",
+      "en": "XR1+7(H)",
+      "zh": "暗车一进七(马)"
+    },
+    {
+      "jps": "1sC2g3/4a4/8H/2x3x2/9/9/X1X1X1Xr1/3GC4/4A4/2s1hX1X1 b A1E2H1R2S3 a1e2h1r1c2s2 0 17",
+      "move": "e0c1",
+      "en": "H5-3",
+      "zh": "马５退３"
+    },
+    {
+      "jps": "1sC2g3/4a4/8H/2x3x2/9/9/X1X1X1Xr1/3GC4/2h1A4/2s2X1X1 r A1E2H1R2S3 a1e2h1r1c2s2 1 18",
+      "move": "e1d0",
+      "en": "A5-6",
+      "zh": "仕五退六"
+    },
+    {
+      "jps": "1sC2g3/4a4/8H/2x3x2/9/9/X1X1X1Xr1/3GC4/2h6/2sA1X1X1 b A1E2H1R2S3 a1e2h1r1c2s2 2 18",
+      "move": "c1e2",
+      "en": "H3-5",
+      "zh": "马３退５"
+    },
+    {
+      "jps": "1sC2g3/4a4/8H/2x3x2/9/9/X1X1X1Xr1/3Gh4/9/2sA1X1X1 r A1E2H1R2S3 a1e2h1r1c2s2 0 19",
+      "move": "d2e2",
+      "en": "G6.5",
+      "zh": "帅六平五"
+    },
+    {
+      "jps": "1sC2g3/4a4/8H/2x3x2/9/9/X1X1X1Xr1/4G4/9/2sA1X1X1 b A1E2H1R2S3 a1e2h1r1c2s2 0 19",
+      "move": "h3g3:?",
+      "en": "R8.7",
+      "zh": "车８平７"
+    },
+    {
+      "jps": "1sC2g3/4a4/8H/2x3x2/9/9/X1X1X1r2/4G4/9/2sA1X1X1 r A1E2H1R2S3 a1e2h1r1c2s2 0 20",
+      "move": "e3e4=S",
+      "en": "XS5+1(S)",
+      "zh": "暗兵五进一(兵)"
+    },
+    {
+      "jps": "1sC2g3/4a4/8H/2x3x2/9/4S4/X1X3r2/4G4/9/2sA1X1X1 b A1E2H1R2S2 a1e2h1r1c2s2 0 20",
+      "move": "g3e3",
+      "en": "R7.5",
+      "zh": "车７平５"
+    }
+  ]
+}

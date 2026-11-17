@@ -1,0 +1,70 @@
+{
+  "description": "Seeded layouts from the starting position, stream words, commitments (Spec 6).",
+  "stream": {
+    "seed": "demo",
+    "first_words": [4030844002, 1225583930, 3228918621, 3961985882, 1359007422, 4210953715, 4009259743, 3683743139]
+  },
+  "seeded_layouts": [
+    {
+      "seed": "demo",
+      "layout": "scsascassheerhrSESHASSSRCAECRH",
+      "layout_numbers": {
+        "black": 303884221,
+        "red": 255867725
+      }
+    },
+    {
+      "seed": "harbor",
+      "layout": "assrcsreasshehcASSHEASCESRCRHS",
+      "layout_numbers": {
+        "black": 43080201,
+        "red": 41751506
+      }
+    },
+    {
+      "seed": "jieqi",
+      "layout": "shcescrsrsahseaSRHCSSERSHAECSA",
+      "layout_numbers": {
+        "black": 268971797,
+        "red": 282299049
+      }
+    },
+    {
+      "seed": "揭棋",
+      "layout": "eesrhscsrcaashsHASESSSHESRARCC",
+      "layout_numbers": {
+        "black": 54373411,
+        "red": 95418876
+      }
+    },
+    {
+      "seed": "research-000001",
+      "layout": "hscsrsracsaheesSRCHCSRASHASEES",
+      "layout_numbers": {
+        "black": 130904766,
+        "red": 285497013
+      }
+    }
+  ],
+  "commitments": [
+    {
+      "board": "xxxxgxxxx/9/1x5x1/x1x1x1x1x/9/9/X1X1X1X1X/1X5X1/9/XXXXGXXXX",
+      "layout": "scsascassheerhrSESHASSSRCAECRH",
+      "salt": "0000000000000000000000000000000000000000000000000000000000000000",
+      "commitment": "sha256:4a90e7a564720149631c3ae4ebf13e5e6a7df96de2165e5f2afa1d07c270a67c"
+    },
+    {
+      "board": "xxxxgxxxx/9/1x5x1/x1x1x1x1x/9/9/X1X1X1X1X/1X5X1/9/XXXXGXXXX",
+      "layout": "scsascassheerhrSESHASSSRCAECRH",
+      "salt": "abababababababababababababababababababababababababababababababab",
+      "commitment": "sha256:11eabb42c4242ca1d956ab98d52fa109f35e6cde4c4ee6cbb44541b9967aa1c3"
+    }
+  ],
+  "unshuffled": {
+    "layout": "rheaaehrccsssssSSSSSCCRHEAAEHR",
+    "layout_numbers": {
+      "black": 150186960,
+      "red": 340539990
+    }
+  }
+}

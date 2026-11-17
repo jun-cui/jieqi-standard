@@ -1,0 +1,50 @@
+{
+  "description": "Records and whether a conforming reader accepts them (Spec 5, section 5).",
+  "records": [
+    {
+      "file": "valid-arbiter.jgr",
+      "valid": true,
+      "why": "the demonstration game, arbiter view"
+    },
+    {
+      "file": "valid-red.jgr",
+      "valid": true,
+      "why": "redacted to the red view"
+    },
+    {
+      "file": "valid-public.jgr",
+      "valid": true,
+      "why": "redacted to the public view"
+    },
+    {
+      "file": "invalid-leaked-disclosure.jgr",
+      "valid": false,
+      "why": "a public record that discloses a captured identity"
+    },
+    {
+      "file": "invalid-tampered-layout.jgr",
+      "valid": false,
+      "why": "the layout no longer matches the commitment or the seed"
+    },
+    {
+      "file": "invalid-layout-in-player-view.jgr",
+      "valid": false,
+      "why": "a red-view record must not contain the layout"
+    },
+    {
+      "file": "invalid-wrong-result.jgr",
+      "valid": false,
+      "why": "the result contradicts the final position"
+    },
+    {
+      "file": "invalid-missing-result-claim.jgr",
+      "valid": false,
+      "why": "claims a kill that the board does not show"
+    },
+    {
+      "file": "valid-unfinished.jgr",
+      "valid": true,
+      "why": "an unfinished game has no result"
+    }
+  ]
+}

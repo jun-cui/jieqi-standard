@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:jieqi-standard:schema:jgr",
+  "title": "Jieqi Game Record (JGR)",
+  "description": "The shape of a JGR record (jieqi-standard Spec 5). A record that fits this schema must still pass the replay checks of Spec 5, section 5.",
+  "type": "object",
+  "required": ["format", "rules", "view", "start", "moves"],
+  "additionalProperties": false,
+  "properties": {
+    "format": { "const": "jgr" },
+    "rules": { "$ref": "#/$defs/ruleset" },
+    "view": { "$ref": "#/$defs/view" },
+    "tags": {
+      "type": "object",
+      "propertyNames": { "pattern": "^[a-z][a-z0-9_]*$" },
+      "additionalProperties": { "type": "string" }
+    },
+    "start": { "$ref": "#/$defs/jps" },
+    "shuffle": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "commitment": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "layout": { "type": "string", "pattern": "^[AEHRCSaehrcs]{1,30}$" },
+        "salt": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "seed": { "type": "string", "minLength": 1 }
+      }
+    },
+    "moves": { "type": "array", "items": { "$ref": "#/$defs/move_code" } },
+    "annotations": { "type": "array", "items": { "$ref": "#/$defs/annotation" } },
+    "result": { "$ref": "#/$defs/result" }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "view": { "const": "arbiter" } } },
+      "then": {
+        "required": ["shuffle"],
+        "properties": { "shuffle": { "required": ["layout"] } }
+      },
+      "else": {
+        "properties": {
+          "shuffle": { "properties": { "layout": false, "salt": false, "seed": false } }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "ruleset": {
+      "type": "string",
+      "pattern": "^jieqi(\\+[a-z][a-z0-9-]*)*$"
+    },
+    "view": { "enum": ["arbiter", "red", "black", "public"] },
+    "jps": {
+      "description": "A 6-field JPS (Spec 3). The layout field never appears in a record's start.",
+      "type": "string",
+      "pattern": "^[GAEHRCSXgaehrcsx1-9]+(/[GAEHRCSXgaehrcsx1-9]+){9} [rb] (-|(?=[AEHRCS])(A[1-9])?(E[1-9])?(H[1-9])?(R[1-9])?(C[1-9])?(S[1-9])?) (-|(?=[aehrcs])(a[1-9])?(e[1-9])?(h[1-9])?(r[1-9])?(c[1-9])?(s[1-9])?) (0|[1-9][0-9]*) [1-9][0-9]*$"
+    },
+    "move_code": {
+      "description": "A move code (Spec 4, section 2): a decision, or an outcome with reveal and capture disclosure.",
+      "type": "string",
+      "pattern": "^[a-i][0-9][a-i][0-9](=[AEHRCS])?(:[AEHRCS?])?$"
+    },
+    "score": {
+      "description": "A JEP score (Spec 7, section 6), for the side to move.",
+      "type": "object",
+      "required": ["ev"],
+      "properties": {
+        "ev": { "type": "number", "minimum": 0, "maximum": 1 },
+        "wdl": {
+          "type": "array",
+          "items": { "type": "number", "minimum": 0, "maximum": 1 },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "kill": { "type": "integer", "not": { "const": 0 } }
+      }
+    },
+    "annotation": {
+      "type": "object",
+      "required": ["after"],
+      "propertyNames": { "pattern": "^[a-z][a-z0-9_]*$" },
+      "properties": {
+        "after": { "type": "integer", "minimum": 0 },
+        "visibility": { "$ref": "#/$defs/view" },
+        "comment": { "type": "string" },
+        "score": { "$ref": "#/$defs/score" },
+        "depth": { "type": "integer", "minimum": 0 },
+        "line": { "type": "array", "items": { "$ref": "#/$defs/move_code" } },
+        "time_ms": { "type": "integer", "minimum": 0 },
+        "clock": {
+          "type": "object",
+          "properties": {
+            "red_ms": { "type": "integer", "minimum": 0 },
+            "black_ms": { "type": "integer", "minimum": 0 }
+          }
+        }
+      }
+    },
+    "result": {
+      "type": "object",
+      "required": ["outcome", "reason"],
+      "additionalProperties": false,
+      "properties": {
+        "outcome": { "enum": ["red-win", "black-win", "draw"] },
+        "reason": {
+          "enum": [
+            "kill", "trap", "perpetual-jiang", "perpetual-chase", "repetition", "move-limit",
+            "bare-generals", "resignation", "agreement", "time", "forfeit", "adjudication"
+          ]
+        },
+        "by": { "type": "string" },
+        "note": { "type": "string" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "reason": { "const": "adjudication" } } },
+          "then": { "required": ["by"] }
+        },
+        {
+          "if": { "properties": { "outcome": { "const": "draw" } } },
+          "then": { "properties": { "reason": { "enum": ["repetition", "move-limit", "bare-generals", "agreement", "adjudication"] } } },
+          "else": { "properties": { "reason": { "enum": ["kill", "trap", "perpetual-jiang", "perpetual-chase", "resignation", "time", "forfeit", "adjudication"] } } }
+        }
+      ]
+    }
+  }
+}

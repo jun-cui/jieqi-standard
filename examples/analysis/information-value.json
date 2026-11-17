@@ -1,0 +1,86 @@
+{
+  "description": "Every tenth position of the demonstration game, analyzed by the baseline engine at depth 2, once from the side to move's own view and once from the arbiter's view (layout known). ev_difference is arbiter ev minus player ev. See spec/08-probability.md, section 6.",
+  "game": "examples/demo-match/game-arbiter.jgr",
+  "positions": [
+    {
+      "after": 10,
+      "side_to_move": "red",
+      "dark_pieces": {
+        "red": 10,
+        "black": 10
+      },
+      "player_view": {
+        "move": "e2e6",
+        "display": "C5+4",
+        "ev": 0.5956
+      },
+      "arbiter_view": {
+        "move": "e2e6",
+        "display": "C5+4",
+        "ev": 0.6723
+      },
+      "ev_difference": 0.0767,
+      "same_move": true
+    },
+    {
+      "after": 20,
+      "side_to_move": "red",
+      "dark_pieces": {
+        "red": 10,
+        "black": 5
+      },
+      "player_view": {
+        "move": "e1e2",
+        "display": "G5+1",
+        "ev": 0.8447
+      },
+      "arbiter_view": {
+        "move": "e1d1",
+        "display": "G5.6",
+        "ev": 0.7938
+      },
+      "ev_difference": -0.0509,
+      "same_move": false
+    },
+    {
+      "after": 30,
+      "side_to_move": "red",
+      "dark_pieces": {
+        "red": 7,
+        "black": 2
+      },
+      "player_view": {
+        "move": "i2e2",
+        "display": "C1.5",
+        "ev": 0.7936
+      },
+      "arbiter_view": {
+        "move": "i2e2",
+        "display": "C1.5",
+        "ev": 0.7625
+      },
+      "ev_difference": -0.0311,
+      "same_move": true
+    },
+    {
+      "after": 40,
+      "side_to_move": "red",
+      "dark_pieces": {
+        "red": 4,
+        "black": 2
+      },
+      "player_view": {
+        "move": "e2d2",
+        "display": "G5.6",
+        "ev": 0.7102
+      },
+      "arbiter_view": {
+        "move": "e2d2",
+        "display": "G5.6",
+        "ev": 0.6822
+      },
+      "ev_difference": -0.028,
+      "same_move": true
+    }
+  ]
+}

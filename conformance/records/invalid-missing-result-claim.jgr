@@ -1,0 +1,32 @@
+{
+  "format": "jgr",
+  "rules": "jieqi",
+  "view": "public",
+  "tags": {
+    "red": "jieqi-baseline",
+    "black": "jieqi-baseline",
+    "event": "jieqi-standard demonstration match",
+    "site": "local",
+    "date": "2026-11-17",
+    "time_control": "none"
+  },
+  "start": "xxxxgxxxx/9/1x5x1/x1x1x1x1x/9/9/X1X1X1X1X/1X5X1/9/XXXXGXXXX r A2E2H2R2C2S5 a2e2h2r2c2s5 0 1",
+  "shuffle": {
+    "commitment": "sha256:78c65e15cf9303f185159070d7684f8871a9430984962f9f675c2aca977783d2"
+  },
+  "moves": [
+    "h2h9=S:?", "b7b0=S:?", "h9g9:?", "b0a0:?", "g9f9:?", "e9f9", "b2b8=S", "a0b0", "c0e2=C", "h7h1=H",
+    "e2e6:?", "b0c0", "b8b9:?", "h1f2", "e0e1", "a9b9=S", "e6a6:?", "d9e8=A", "a6a9", "f2d3"
+  ],
+  "annotations": [
+    {
+      "after": 0,
+      "visibility": "public",
+      "comment": "Sealed shuffle sha256:78c65e15cf9303f185159070d7684f8871a9430984962f9f675c2aca977783d2"
+    }
+  ],
+  "result": {
+    "outcome": "red-win",
+    "reason": "kill"
+  }
+}

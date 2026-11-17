@@ -1,0 +1,4 @@
+# Vectors, records, and transcripts are compared byte for byte: keep LF everywhere.
+* text=auto eol=lf
+*.jgr text eol=lf linguist-language=JSON
+*.jgrl text eol=lf linguist-language=JSON

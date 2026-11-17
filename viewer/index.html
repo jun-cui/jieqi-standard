@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jieqi record viewer</title>
+<style>
+  :root {
+    --bg: #f6f3ec; --panel: #fffdf8; --ink: #1f1d1a; --muted: #6f6a60; --line: #d9d1c1;
+    --board: #e9c98f; --grid: #6b4a1f; --red: #b3261e; --black: #1f2a33; --accent: #2f6f5e;
+    --dark-piece: #3b3530; --highlight: rgba(47, 111, 94, 0.28);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #161513; --panel: #201e1b; --ink: #ece7dc; --muted: #a39d90; --line: #3a362f;
+      --board: #8a6a3a; --grid: #2b1e0d; --red: #ff8a7a; --black: #cfe3f0; --accent: #6fc2a8;
+      --dark-piece: #0f0e0c; --highlight: rgba(111, 194, 168, 0.30);
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  header { padding: 18px 16px 8px; max-width: 1180px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 12px; align-items: baseline; justify-content: space-between; }
+  h1 { font-size: 20px; margin: 0; letter-spacing: 0.01em; }
+  h1 small { color: var(--muted); font-weight: 400; margin-left: 6px; }
+  .controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  select, button, label.file { font: inherit; color: var(--ink); background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; cursor: pointer; }
+  button:disabled { opacity: 0.4; cursor: default; }
+  main { max-width: 1180px; margin: 0 auto; padding: 8px 16px 32px; display: grid; grid-template-columns: minmax(0, 560px) minmax(0, 1fr); gap: 20px; }
+  @media (max-width: 900px) { main { grid-template-columns: minmax(0, 1fr); } }
+  .side > .card { min-width: 0; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+  svg { width: 100%; height: auto; display: block; }
+  .nav { display: flex; gap: 6px; justify-content: center; margin-top: 10px; align-items: center; }
+  .nav span { min-width: 120px; text-align: center; color: var(--muted); }
+  .views { display: flex; gap: 4px; flex-wrap: wrap; }
+  .views button[aria-pressed="true"] { background: var(--accent); color: var(--panel); border-color: var(--accent); }
+  .side { display: grid; gap: 14px; align-content: start; }
+  h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin: 0 0 8px; }
+  .pools { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .bar { display: grid; grid-template-columns: 22px 1fr 54px; gap: 6px; align-items: center; font-size: 13px; margin: 3px 0; }
+  .bar i { display: block; height: 10px; border-radius: 5px; background: var(--accent); }
+  .bar .track { background: var(--line); border-radius: 5px; overflow: hidden; }
+  .note { color: var(--muted); font-size: 13px; }
+  .moves { max-height: 340px; overflow: auto; font-variant-numeric: tabular-nums; }
+  .moves table { border-collapse: collapse; width: 100%; font-size: 14px; }
+  .moves td { padding: 2px 6px; cursor: pointer; border-radius: 6px; white-space: nowrap; }
+  .moves td.n { color: var(--muted); cursor: default; width: 2.5em; text-align: right; }
+  .moves td.current { background: var(--highlight); }
+  .moves code { color: var(--muted); font-size: 12px; margin-left: 6px; }
+  code, .mono { font-family: ui-monospace, "Cascadia Code", Menlo, monospace; font-size: 12.5px; overflow-wrap: anywhere; }
+  .ok { color: var(--accent); } .bad { color: var(--red); }
+  .result { font-weight: 600; }
+  .eval { display: flex; gap: 8px; align-items: center; }
+  .eval .track { flex: 1; height: 12px; background: var(--black); border-radius: 6px; overflow: hidden; }
+  .eval .track i { display: block; height: 100%; background: var(--red); }
+</style>
+</head>
+<body>
+<header>
+  <h1>Jieqi record viewer</h1>
+  <div class="controls">
+    <select id="example" aria-label="Example record">
+      <option value="../examples/demo-match/game-arbiter.jgr">Demonstration match (arbiter)</option>
+      <option value="../examples/demo-match/game-red.jgr">Demonstration match (red)</option>
+      <option value="../examples/demo-match/game-public.jgr">Demonstration match (public)</option>
+    </select>
+    <label class="file">Open .jgr… <input id="file" type="file" accept=".jgr,.json,application/json" hidden></label>
+    <select id="lang" aria-label="Notation"><option value="zh">炮二平五</option><option value="en">C2.5</option></select>
+  </div>
+</header>
+<main>
+  <section class="card">
+    <svg id="board" viewBox="0 0 560 620" role="img" aria-label="Board"></svg>
+    <div class="nav">
+      <button id="first">First</button>
+      <button id="prev">Back</button>
+      <span id="counter">start</span>
+      <button id="next">Next</button>
+      <button id="last">Last</button>
+    </div>
+  </section>
+  <section class="side">
+    <div class="card">
+      <h2>View</h2>
+      <div class="views" id="views"></div>
+      <p class="note" id="viewnote"></p>
+    </div>
+    <div class="card">
+      <h2>Reveal odds</h2>
+      <div class="pools" id="pools"></div>
+    </div>
+    <div class="card" id="evalcard" hidden>
+      <h2>Engine evaluation</h2>
+      <div id="eval"></div>
+    </div>
+    <div class="card">
+      <h2>Moves</h2>
+      <div class="moves" id="moves"></div>
+      <p class="result" id="result"></p>
+    </div>
+    <div class="card">
+      <h2>Record</h2>
+      <div id="meta" class="note"></div>
+      <p class="mono" id="jps"></p>
+    </div>
+  </section>
+</main>
+<script type="module" src="viewer.js"></script>
+</body>
+</html>

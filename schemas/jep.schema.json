@@ -1,0 +1,238 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:jieqi-standard:schema:jep",
+  "title": "Jieqi Engine Protocol (JEP) messages",
+  "description": "One JEP message (jieqi-standard Spec 7). Validate host-to-engine lines against #/$defs/host_message and engine-to-host lines against #/$defs/engine_message. Unknown members are allowed: receivers ignore them.",
+  "anyOf": [
+    { "$ref": "#/$defs/host_message" },
+    { "$ref": "#/$defs/engine_message" }
+  ],
+  "$defs": {
+    "host_message": {
+      "oneOf": [
+        { "$ref": "#/$defs/host_hello" },
+        { "$ref": "#/$defs/option" },
+        { "$ref": "#/$defs/newgame" },
+        { "$ref": "#/$defs/position" },
+        { "$ref": "#/$defs/play" },
+        { "$ref": "#/$defs/go" },
+        { "$ref": "#/$defs/stop" },
+        { "$ref": "#/$defs/ping" },
+        { "$ref": "#/$defs/offer" },
+        { "$ref": "#/$defs/result" },
+        { "$ref": "#/$defs/quit" }
+      ]
+    },
+    "engine_message": {
+      "oneOf": [
+        { "$ref": "#/$defs/engine_hello" },
+        { "$ref": "#/$defs/info" },
+        { "$ref": "#/$defs/move" },
+        { "$ref": "#/$defs/resign" },
+        { "$ref": "#/$defs/pong" },
+        { "$ref": "#/$defs/reply" },
+        { "$ref": "#/$defs/error" }
+      ]
+    },
+
+    "id": { "type": ["string", "integer"] },
+    "view": { "enum": ["arbiter", "red", "black", "public"] },
+    "ruleset": { "type": "string", "pattern": "^jieqi(\\+[a-z][a-z0-9-]*)*$" },
+    "decision": { "type": "string", "pattern": "^[a-i][0-9][a-i][0-9]$" },
+    "move_code": { "type": "string", "pattern": "^[a-i][0-9][a-i][0-9](=[AEHRCS])?(:[AEHRCS?])?$" },
+    "identity": { "enum": ["A", "E", "H", "R", "C", "S"] },
+    "jps": {
+      "type": "string",
+      "pattern": "^[GAEHRCSXgaehrcsx1-9]+(/[GAEHRCSXgaehrcsx1-9]+){9} [rb] (-|(?=[AEHRCS])(A[1-9])?(E[1-9])?(H[1-9])?(R[1-9])?(C[1-9])?(S[1-9])?) (-|(?=[aehrcs])(a[1-9])?(e[1-9])?(h[1-9])?(r[1-9])?(c[1-9])?(s[1-9])?) (0|[1-9][0-9]*) [1-9][0-9]*( [AEHRCSaehrcs]+)?$"
+    },
+    "party": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "author": { "type": "string" }
+      }
+    },
+    "score": {
+      "type": "object",
+      "required": ["ev"],
+      "properties": {
+        "ev": { "type": "number", "minimum": 0, "maximum": 1 },
+        "wdl": { "type": "array", "items": { "type": "number", "minimum": 0, "maximum": 1 }, "minItems": 3, "maxItems": 3 },
+        "kill": { "type": "integer", "not": { "const": 0 } }
+      }
+    },
+    "breakdown": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["as", "p", "ev"],
+        "properties": {
+          "as": { "$ref": "#/$defs/identity" },
+          "p": { "type": "number", "minimum": 0, "maximum": 1 },
+          "ev": { "type": "number", "minimum": 0, "maximum": 1 }
+        }
+      }
+    },
+    "candidate": {
+      "type": "object",
+      "required": ["move", "ev"],
+      "properties": {
+        "move": { "$ref": "#/$defs/decision" },
+        "ev": { "type": "number", "minimum": 0, "maximum": 1 },
+        "wdl": { "$ref": "#/$defs/score/properties/wdl" },
+        "visits": { "type": "integer", "minimum": 0 },
+        "reveals": { "$ref": "#/$defs/breakdown" },
+        "captures": { "$ref": "#/$defs/breakdown" }
+      }
+    },
+    "option_spec": {
+      "type": "object",
+      "required": ["name", "kind"],
+      "properties": {
+        "name": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
+        "kind": { "enum": ["integer", "number", "boolean", "string", "choice", "action"] },
+        "label": { "type": "string" },
+        "choices": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+
+    "host_hello": {
+      "type": "object",
+      "required": ["type", "protocol"],
+      "properties": { "type": { "const": "hello" }, "protocol": { "const": "jep" }, "host": { "$ref": "#/$defs/party" } },
+      "not": { "required": ["engine"] }
+    },
+    "option": {
+      "type": "object",
+      "required": ["type", "name", "value"],
+      "properties": { "type": { "const": "option" }, "name": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" } }
+    },
+    "newgame": {
+      "type": "object",
+      "required": ["type"],
+      "properties": { "type": { "const": "newgame" }, "rules": { "$ref": "#/$defs/ruleset" }, "side": { "enum": ["red", "black", null] } }
+    },
+    "position": {
+      "type": "object",
+      "required": ["type", "view", "start", "moves"],
+      "properties": {
+        "type": { "const": "position" },
+        "view": { "$ref": "#/$defs/view" },
+        "start": { "$ref": "#/$defs/jps" },
+        "moves": { "type": "array", "items": { "$ref": "#/$defs/move_code" } }
+      }
+    },
+    "play": {
+      "type": "object",
+      "required": ["type", "move"],
+      "properties": { "type": { "const": "play" }, "move": { "$ref": "#/$defs/move_code" } }
+    },
+    "go": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": { "const": "go" },
+        "id": { "$ref": "#/$defs/id" },
+        "limits": {
+          "type": "object",
+          "properties": {
+            "time_ms": { "type": "integer", "minimum": 0 },
+            "depth": { "type": "integer", "minimum": 1 },
+            "nodes": { "type": "integer", "minimum": 1 }
+          }
+        },
+        "clock": {
+          "type": "object",
+          "properties": {
+            "red_ms": { "type": "integer", "minimum": 0 },
+            "black_ms": { "type": "integer", "minimum": 0 },
+            "red_inc_ms": { "type": "integer", "minimum": 0 },
+            "black_inc_ms": { "type": "integer", "minimum": 0 },
+            "moves_to_go": { "type": "integer", "minimum": 1 }
+          }
+        },
+        "candidates": { "type": "integer", "minimum": 0 },
+        "infinite": { "type": "boolean" }
+      }
+    },
+    "stop": { "type": "object", "required": ["type"], "properties": { "type": { "const": "stop" } } },
+    "ping": { "type": "object", "required": ["type"], "properties": { "type": { "const": "ping" }, "id": { "$ref": "#/$defs/id" } } },
+    "offer": {
+      "type": "object",
+      "required": ["type", "kind"],
+      "properties": { "type": { "const": "offer" }, "kind": { "const": "draw" } }
+    },
+    "result": {
+      "type": "object",
+      "required": ["type", "outcome", "reason"],
+      "properties": {
+        "type": { "const": "result" },
+        "outcome": { "enum": ["red-win", "black-win", "draw"] },
+        "reason": { "type": "string" }
+      }
+    },
+    "quit": { "type": "object", "required": ["type"], "properties": { "type": { "const": "quit" } } },
+
+    "engine_hello": {
+      "type": "object",
+      "required": ["type", "protocol", "engine", "rules", "views"],
+      "properties": {
+        "type": { "const": "hello" },
+        "protocol": { "const": "jep" },
+        "engine": { "allOf": [{ "$ref": "#/$defs/party" }, { "required": ["name"] }] },
+        "rules": { "type": "array", "items": { "$ref": "#/$defs/ruleset" }, "minItems": 1 },
+        "views": { "type": "array", "items": { "$ref": "#/$defs/view" }, "minItems": 1 },
+        "features": { "type": "array", "items": { "type": "string" } },
+        "options": { "type": "array", "items": { "$ref": "#/$defs/option_spec" } }
+      }
+    },
+    "info": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": { "const": "info" },
+        "id": { "$ref": "#/$defs/id" },
+        "depth": { "type": "integer", "minimum": 0 },
+        "nodes": { "type": "integer", "minimum": 0 },
+        "time_ms": { "type": "integer", "minimum": 0 },
+        "nps": { "type": "number", "minimum": 0 },
+        "score": { "$ref": "#/$defs/score" },
+        "line": { "type": "array", "items": { "$ref": "#/$defs/move_code" } },
+        "candidates": { "type": "array", "items": { "$ref": "#/$defs/candidate" } },
+        "text": { "type": "string" }
+      }
+    },
+    "move": {
+      "type": "object",
+      "required": ["type", "move"],
+      "properties": {
+        "type": { "const": "move" },
+        "id": { "$ref": "#/$defs/id" },
+        "move": { "$ref": "#/$defs/decision" },
+        "score": { "$ref": "#/$defs/score" },
+        "offer_draw": { "type": "boolean" }
+      }
+    },
+    "resign": { "type": "object", "required": ["type"], "properties": { "type": { "const": "resign" }, "id": { "$ref": "#/$defs/id" } } },
+    "pong": { "type": "object", "required": ["type"], "properties": { "type": { "const": "pong" }, "id": { "$ref": "#/$defs/id" } } },
+    "reply": {
+      "type": "object",
+      "required": ["type", "kind", "accept"],
+      "properties": { "type": { "const": "reply" }, "kind": { "const": "draw" }, "accept": { "type": "boolean" } }
+    },
+    "error": {
+      "type": "object",
+      "required": ["type", "code", "message"],
+      "properties": {
+        "type": { "const": "error" },
+        "code": {
+          "enum": [
+            "bad-message", "unknown-type", "bad-position", "illegal-move", "unsupported-rules",
+            "unsupported-view", "bad-option", "busy", "internal"
+          ]
+        },
+        "message": { "type": "string" }
+      }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "description": "Tree counts (Spec 8, section 5). counts[d-1] is the count at depth d.",
+  "vectors": [
+    {
+      "name": "the starting position",
+      "jps": "xxxxgxxxx/9/1x5x1/x1x1x1x1x/9/9/X1X1X1X1X/1X5X1/9/XXXXGXXXX r A2E2H2R2C2S5 a2e2h2r2c2s5 0 1",
+      "mode": "chance",
+      "counts": [259, 66462, 13862869]
+    },
+    {
+      "name": "the starting position, layout from seed \"demo\"",
+      "jps": "xxxxgxxxx/9/1x5x1/x1x1x1x1x/9/9/X1X1X1X1X/1X5X1/9/XXXXGXXXX r A2E2H2R2C2S5 a2e2h2r2c2s5 0 1 scsascassheerhrSESHASSSRCAECRH",
+      "mode": "layout",
+      "counts": [44, 1926, 71080]
+    },
+    {
+      "name": "the starting position, unshuffled layout",
+      "jps": "xxxxgxxxx/9/1x5x1/x1x1x1x1x/9/9/X1X1X1X1X/1X5X1/9/XXXXGXXXX r A2E2H2R2C2S5 a2e2h2r2c2s5 0 1 rheaaehrccsssssSSSSSCCRHEAAEHR",
+      "mode": "layout",
+      "counts": [44, 1920, 79666]
+    },
+    {
+      "name": "demonstration game, after move 10",
+      "jps": "xxxx1g2x/1S7/9/x1x1x1x1x/9/9/X1X1X1X1X/4C4/7h1/1s1XGXXXX r A2E2H2R2C1S3 a2e2h1r2c2s4 0 6",
+      "mode": "chance",
+      "counts": [68, 5881]
+    },
+    {
+      "name": "demonstration game, after move 20",
+      "jps": "Csx2g2x/4a4/9/2x3x1x/9/9/X1XhX1X1X/9/4G4/2sX1XXXX r A2E2H2R2C1S3 a1e2h1r2c2s3 2 11",
+      "mode": "chance",
+      "counts": [3, 159]
+    },
+    {
+      "name": "demonstration game, after move 30",
+      "jps": "1sC2g3/4a4/8s/2x3x2/9/9/X1X1X1X1r/3G4C/4A4/2s1hX1XX r A1E2H2R2S3 a1e2h1r1c2s2 0 16",
+      "mode": "chance",
+      "counts": [47, 1267]
+    },
+    {
+      "name": "demonstration game, after move 40",
+      "jps": "1sC2g3/4a4/8H/2x3x2/9/4S4/X1X1r4/4G4/9/2sA1X1X1 r A1E2H1R2S2 a1e2h1r1c2s2 1 21",
+      "mode": "chance",
+      "counts": [1, 29]
+    }
+  ]
+}

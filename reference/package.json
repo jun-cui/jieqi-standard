@@ -1,0 +1,32 @@
+{
+  "name": "jieqi-standard",
+  "description": "Reference implementation of jieqi-standard: Jieqi rules, JPS positions, JGR records, sealed shuffles, and the JEP engine protocol.",
+  "type": "module",
+  "license": "MIT",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "bin": {
+    "jieqi": "./bin/jieqi.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test",
+    "conformance": "node scripts/run-conformance.js",
+    "schemas": "node scripts/check-schemas.js",
+    "docs": "node scripts/check-docs.js",
+    "check": "npm test && npm run conformance && npm run schemas && npm run docs",
+    "vectors": "node scripts/generate-vectors.js",
+    "demo": "node scripts/demo.js",
+    "viewer": "node bin/jieqi.js serve"
+  },
+  "keywords": [
+    "jieqi",
+    "xiangqi",
+    "揭棋",
+    "game-record",
+    "engine-protocol"
+  ]
+}

@@ -1,0 +1,348 @@
+{
+  "format": "jgr",
+  "rules": "jieqi",
+  "view": "red",
+  "tags": {
+    "red": "jieqi-baseline",
+    "black": "jieqi-baseline",
+    "event": "jieqi-standard demonstration match",
+    "site": "local",
+    "date": "2026-11-17",
+    "time_control": "none"
+  },
+  "start": "xxxxgxxxx/9/1x5x1/x1x1x1x1x/9/9/X1X1X1X1X/1X5X1/9/XXXXGXXXX r A2E2H2R2C2S5 a2e2h2r2c2s5 0 1",
+  "shuffle": {
+    "layout": "scsascassheerhrSESHASSSRCAECRH",
+    "salt": "6fa5009475db9e77639184d98816c33244b04cac8e08295eb71a29d605e11d17",
+    "commitment": "sha256:78c65e15cf9303f185159070d7684f8871a9430984962f9f675c2aca977783d2",
+    "seed": "demo"
+  },
+  "moves": [
+    "h2h9=S:A", "b7b0=S:?", "h9g9:C", "b0a0:?", "g9f9:S", "e9f9", "b2b8=S", "a0b0", "c0e2=C", "h7h1=H",
+    "e2e6:R", "b0c0", "b8b9:C", "h1f2", "e0e1", "a9b9=S", "e6a6:E", "d9e8=A", "a6a9", "f2d3",
+    "e1e2", "d3c1", "e2d2", "c1e0", "d0e1=A", "i6i5=R", "a9c9:S", "i9i7=S", "g0i2=C", "i5i3:?",
+    "i2e2", "i3h3", "i0i7=H", "e0c1", "e1d0", "c1e2", "d2e2", "h3g3:?", "e3e4=S", "g3e3",
+    "e2d2", "e3d3", "d2e2", "d3e3", "e2d2", "e3d3", "d2e2", "d3e3"
+  ],
+  "annotations": [
+    {
+      "after": 0,
+      "visibility": "public",
+      "comment": "Sealed shuffle sha256:78c65e15cf9303f185159070d7684f8871a9430984962f9f675c2aca977783d2"
+    },
+    {
+      "after": 1,
+      "visibility": "red",
+      "score": {
+        "ev": 0.4908
+      },
+      "depth": 2,
+      "line": [
+        "h2h9=S:?",
+        "i9h9=S"
+      ]
+    },
+    {
+      "after": 3,
+      "visibility": "red",
+      "score": {
+        "ev": 0.5029
+      },
+      "depth": 2,
+      "line": [
+        "h9g9:?",
+        "b0c0:?",
+        "g9f9:?",
+        "e9f9"
+      ]
+    },
+    {
+      "after": 5,
+      "visibility": "red",
+      "score": {
+        "ev": 0.5362
+      },
+      "depth": 2,
+      "line": [
+        "g9f9:?",
+        "e9f9"
+      ]
+    },
+    {
+      "after": 7,
+      "visibility": "red",
+      "score": {
+        "ev": 0.5046
+      },
+      "depth": 2,
+      "line": [
+        "b2b8=S",
+        "e6e5=S",
+        "b8b9:?"
+      ]
+    },
+    {
+      "after": 9,
+      "visibility": "red",
+      "score": {
+        "ev": 0.5619
+      },
+      "depth": 2,
+      "line": [
+        "c0e2=S",
+        "b0c0",
+        "b8b9:?",
+        "c0d0:?",
+        "e0d0"
+      ]
+    },
+    {
+      "after": 11,
+      "visibility": "red",
+      "score": {
+        "ev": 0.5956
+      },
+      "depth": 2,
+      "line": [
+        "e2e6:?",
+        "h1f0:?",
+        "b8b9:?"
+      ]
+    },
+    {
+      "after": 13,
+      "visibility": "red",
+      "score": {
+        "ev": 0.7816
+      },
+      "depth": 2,
+      "line": [
+        "b8b9:?",
+        "c0d0:?",
+        "e0d0",
+        "h1f0:?",
+        "b9c9:?"
+      ]
+    },
+    {
+      "after": 15,
+      "visibility": "red",
+      "score": {
+        "ev": 0.8205
+      },
+      "depth": 2,
+      "line": [
+        "e0e1",
+        "c0d0:?",
+        "b9c9:?",
+        "f2g0:?",
+        "c9d9:?"
+      ]
+    },
+    {
+      "after": 17,
+      "visibility": "red",
+      "score": {
+        "ev": 0.8516
+      },
+      "depth": 2,
+      "line": [
+        "e6a6:?",
+        "c0d0:?",
+        "a6g6:?"
+      ]
+    },
+    {
+      "after": 19,
+      "visibility": "red",
+      "score": {
+        "ev": 0.8446
+      },
+      "depth": 2,
+      "line": [
+        "a6a9",
+        "f9f8"
+      ]
+    },
+    {
+      "after": 21,
+      "visibility": "red",
+      "score": {
+        "ev": 0.8447
+      },
+      "depth": 2,
+      "line": [
+        "e1e2",
+        "d3c1",
+        "e2e1",
+        "c0d0:?",
+        "a9c9:?"
+      ]
+    },
+    {
+      "after": 23,
+      "visibility": "red",
+      "score": {
+        "ev": 0.8433
+      },
+      "depth": 2,
+      "line": [
+        "e2d2",
+        "f9f8"
+      ]
+    },
+    {
+      "after": 25,
+      "visibility": "red",
+      "score": {
+        "ev": 0.8868
+      },
+      "depth": 2,
+      "line": [
+        "d0e1=S",
+        "c6c5=S",
+        "a9c9:?"
+      ]
+    },
+    {
+      "after": 27,
+      "visibility": "red",
+      "score": {
+        "ev": 0.811
+      },
+      "depth": 2,
+      "line": [
+        "a9c9:?",
+        "i5i3:?"
+      ]
+    },
+    {
+      "after": 29,
+      "visibility": "red",
+      "score": {
+        "ev": 0.8176
+      },
+      "depth": 2,
+      "line": [
+        "g0i2=S",
+        "i5d5",
+        "d2e2"
+      ]
+    },
+    {
+      "after": 31,
+      "visibility": "red",
+      "score": {
+        "ev": 0.7936
+      },
+      "depth": 2,
+      "line": [
+        "i2e2",
+        "e0c1"
+      ]
+    },
+    {
+      "after": 33,
+      "visibility": "red",
+      "score": {
+        "ev": 0.8224
+      },
+      "depth": 2,
+      "line": [
+        "i0i7=S",
+        "e0c1"
+      ]
+    },
+    {
+      "after": 35,
+      "visibility": "red",
+      "score": {
+        "ev": 0.8219
+      },
+      "depth": 2,
+      "line": [
+        "e1d0",
+        "c1e2",
+        "d2e2",
+        "h3g3:?",
+        "i7g6:?"
+      ]
+    },
+    {
+      "after": 37,
+      "visibility": "red",
+      "score": {
+        "ev": 0.747
+      },
+      "depth": 2,
+      "line": [
+        "d2e2",
+        "h3g3:?"
+      ]
+    },
+    {
+      "after": 39,
+      "visibility": "red",
+      "score": {
+        "ev": 0.7142
+      },
+      "depth": 2,
+      "line": [
+        "e3e4=S",
+        "c0d0"
+      ]
+    },
+    {
+      "after": 41,
+      "visibility": "red",
+      "score": {
+        "ev": 0.7102
+      },
+      "depth": 2,
+      "line": [
+        "e2d2",
+        "c0d0",
+        "i7g6:?",
+        "e3e4"
+      ]
+    },
+    {
+      "after": 43,
+      "visibility": "red",
+      "score": {
+        "ev": 0.5
+      },
+      "depth": 2,
+      "line": [
+        "d2e2",
+        "d3e3"
+      ]
+    },
+    {
+      "after": 45,
+      "visibility": "red",
+      "score": {
+        "ev": 0.5
+      },
+      "depth": 2,
+      "line": [
+        "e2d2"
+      ]
+    },
+    {
+      "after": 47,
+      "visibility": "red",
+      "score": {
+        "ev": 0.5
+      },
+      "depth": 2,
+      "line": [
+        "d2e2"
+      ]
+    }
+  ],
+  "result": {
+    "outcome": "red-win",
+    "reason": "perpetual-jiang"
+  }
+}
