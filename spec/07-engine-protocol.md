@@ -12,7 +12,7 @@ Three things set it apart from protocols written for games without hidden pieces
 
 JSON was chosen over a word-based text protocol because several messages carry nested data (lists of candidate moves, each with its own list of possible reveals) and options with types. Any language can parse JSON, and the extra bytes do not matter next to the time an engine spends searching.
 
-The host sends a complete position first and single moves after that, so the engine never has to work out where it is. A move sent by the engine is only a decision: the engine cannot know what its own dark piece will turn out to be, so the host reports the outcome back to it, just as it reports the opponent's moves.
+The host first sends the game so far (its starting position and every move since) and then single moves, so the engine never has to work out where it is and always has the whole history of the game. A move sent by the engine is only a decision: the engine cannot know what its own dark piece will turn out to be, so the host reports the outcome back to it, just as it reports the opponent's moves.
 
 ## 2. Transport
 
@@ -54,6 +54,7 @@ Every `position` message names a view ([spec 5](05-record.md#4-views)):
 
 A host:
 
+- MUST send the whole game in every `position` message for a position that belongs to a game: `start` is the position the game started from, and `moves` lists every move played since, in order. After that it MUST report every further move with `play`, the engine's own moves included. Only a position with no game behind it, such as a puzzle, may be sent as `start` with an empty `moves` list.
 - MUST send an engine that is playing a game only the view of the side it plays, writing every move code for that view. When the opponent captures one of the engine's dark pieces, the engine receives `:?`.
 - MUST NOT send an `arbiter` position to an engine that is playing a game in progress.
 - MUST NOT pass one engine's `info` messages on to the other engine.
@@ -62,6 +63,8 @@ An engine:
 
 - MUST list the views it accepts in its `hello`, and refuse any other with `unsupported-view`.
 - MUST treat dark identities as unknown, apart from what its view tells it. In the `red`, `black` and `public` views this means taking reveal odds from the pools (spec 8).
+
+Together these rules mean that an engine always holds the full history of the game as its side saw it: every move, every reveal, the identities of the pieces its side captured, and `:?` wherever the opponent captured one of its dark pieces. An engine needs this history to apply the repetition rules (rule 9), and may use it in any other way, for example as input to a neural network. A game record written from the same side's view ([spec 5](05-record.md)) contains exactly the same moves, so player-view records can serve as training data in the form an engine sees during play.
 
 ## 5. Messages
 
@@ -72,7 +75,7 @@ An engine:
 | `hello` | `protocol` (`"jep"`), `host` {`name`} | Starts the session. Always the first message. |
 | `option` | `name`, `value` | Sets an engine option. No reply when it succeeds. |
 | `newgame` | `rules`, `side` (`"red"`, `"black"` or absent) | A new game begins; the engine resets its game state. |
-| `position` | `view`, `start` (JPS), `moves` (outcome codes) | Sets the position, replacing any earlier one. |
+| `position` | `view`, `start` (JPS), `moves` (outcome codes) | Sets the position, replacing any earlier one. Within a game, `start` is the game's starting position and `moves` the whole game so far (section 4). |
 | `play` | `move` (outcome code) | Adds one move to the current position. |
 | `go` | `id`, `limits`, `clock`, `candidates`, `infinite` | Starts a search (section 9). |
 | `stop` | | Ends the current search. The engine answers with `move` as soon as possible. |

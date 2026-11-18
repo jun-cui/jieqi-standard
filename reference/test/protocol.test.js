@@ -49,7 +49,7 @@ test('a JEP session: hello, position, go, move, play, ping, stop, errors', async
   }
 });
 
-test('a hosted match: the arbiter record validates and redacts', { timeout: 60000 }, async () => {
+test('a hosted match: records validate, and each engine gets its own full history', { timeout: 60000 }, async () => {
   const transcript = [];
   const { game, record } = await runMatch({
     red: ENGINE, black: ENGINE, seed: 'protocol-test', depth: 1, maxMoves: 12, transcript,
@@ -66,5 +66,17 @@ test('a hosted match: the arbiter record validates and redacts', { timeout: 6000
       const capturer = index % 2 === 0 ? 'red' : 'black';
       assert.equal(who, capturer, `${who} was told ${move}`);
     }
+  }
+  // Full history (spec 7, section 4): the game's starting position, then every
+  // move in order, written for the engine's own view.
+  for (const side of ['red', 'black']) {
+    const prefix = `>> ${side} `;
+    const sent = transcript.filter((l) => l.startsWith(prefix)).map((l) => JSON.parse(l.slice(prefix.length)));
+    const positions = sent.filter((m) => m.type === 'position');
+    assert.equal(positions.length, 1);
+    assert.equal(positions[0].start, record.start);
+    assert.equal(positions[0].view, side);
+    const later = sent.slice(sent.indexOf(positions[0]) + 1).filter((m) => m.type === 'play').map((m) => m.move);
+    assert.deepEqual([...positions[0].moves, ...later], redactRecord(record, side).moves);
   }
 });

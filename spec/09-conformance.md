@@ -48,7 +48,10 @@ The engine protocol is a dialogue, so there is no vector file for it. A conformi
 9. It answers an unknown `type` with `unknown-type`, an illegal `play` with `illegal-move` and an unlisted ruleset with `unsupported-rules`, and keeps working afterwards.
 10. It exits on `quit` and at the end of its input.
 
-A conforming host passes the check in the same test that, over a whole game, every capture disclosure sent to an engine came from a capture made by that engine's own side.
+A conforming host passes the two host checks in the same test. Over a whole game:
+
+1. every capture disclosure sent to an engine came from a capture made by that engine's own side;
+2. each engine was given the game's starting position, and the moves in its `position` message followed by every `play` it received are exactly the moves of that side's record of the game.
 
 ## 4. Running the vectors
 
